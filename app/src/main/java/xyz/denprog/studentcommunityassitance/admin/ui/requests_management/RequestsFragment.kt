@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.NavHostFragment
 import xyz.denprog.studentcommunityassitance.R
 import xyz.denprog.studentcommunityassitance.admin.AdminActivityViewModel
 import xyz.denprog.studentcommunityassitance.admin.ui.requests_management.placeholder.PlaceholderContent
@@ -48,7 +49,8 @@ class RequestsFragment : Fragment() {
 
         adapter.onRequestClicked = {
             adminViewModel.requestSelected = it.requestId
-
+            val controller = NavHostFragment.findNavController(requireParentFragment())
+            controller.navigate(R.id.action_requestsFragment2_to_requestDetailFragment2)
         }
 
         return binding.root
