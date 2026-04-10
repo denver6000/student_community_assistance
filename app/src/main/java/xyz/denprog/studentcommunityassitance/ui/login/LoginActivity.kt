@@ -1,6 +1,7 @@
 package xyz.denprog.studentcommunityassitance.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,13 +13,18 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import xyz.denprog.studentcommunityassitance.MainActivity
 import xyz.denprog.studentcommunityassitance.databinding.ActivityLoginBinding
 
 import xyz.denprog.studentcommunityassitance.R
+import xyz.denprog.studentcommunityassitance.admin.AdminActivity
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +37,6 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.password
         val login = binding.login
         val loading = binding.loading
-
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -58,11 +61,29 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
+                if (loginResult.success.isAdmin) {
+                    val adminPageIntent = Intent(
+                        this,
+                        AdminActivity::class.java
+                    )
+                    startActivity(
+                        adminPageIntent
+                    )
+                }else {
+                    val mainPageIntent = Intent(
+                        this,
+                        MainActivity::class.java
+                    )
+                    startActivity(
+                        mainPageIntent
+                    )
+                }
+                finish()
             }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
+//            setResult(Activity.RESULT_OK)
+//
+//            //Complete and destroy login activity once successful
+//            finish()
         })
 
         username.afterTextChanged {
