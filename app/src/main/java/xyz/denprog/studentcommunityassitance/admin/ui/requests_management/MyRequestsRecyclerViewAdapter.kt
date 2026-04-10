@@ -19,6 +19,8 @@ class MyRequestsRecyclerViewAdapter(
     private val values: ArrayList<Request>
 ) : RecyclerView.Adapter<MyRequestsRecyclerViewAdapter.ViewHolder>() {
 
+    var onRequestClicked: ((Request) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
@@ -41,6 +43,9 @@ class MyRequestsRecyclerViewAdapter(
         val item = values[position]
         holder.idView.text = item.requestId.toString()
         holder.contentView.text = item.title
+            holder.itemView.setOnClickListener {
+                onRequestClicked?.invoke(item)
+            }
     }
 
     override fun getItemCount(): Int = values.size

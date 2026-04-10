@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.denprog.studentcommunityassitance.MainActivityViewModel
 import xyz.denprog.studentcommunityassitance.R
+import xyz.denprog.studentcommunityassitance.admin.AdminActivityViewModel
 import xyz.denprog.studentcommunityassitance.databinding.ActivityAdminBinding
 import xyz.denprog.studentcommunityassitance.ui.login.LoginActivity
 
@@ -26,6 +27,7 @@ class AdminActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityAdminBinding
     private val viewModel: MainActivityViewModel by viewModels()
+    private val adminVm: AdminActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

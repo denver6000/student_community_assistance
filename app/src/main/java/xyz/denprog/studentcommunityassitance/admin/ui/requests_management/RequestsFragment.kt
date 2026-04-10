@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import xyz.denprog.studentcommunityassitance.R
+import xyz.denprog.studentcommunityassitance.admin.AdminActivityViewModel
 import xyz.denprog.studentcommunityassitance.admin.ui.requests_management.placeholder.PlaceholderContent
 import xyz.denprog.studentcommunityassitance.database.entity.Request
 import xyz.denprog.studentcommunityassitance.databinding.FragmentRequestsListBinding
@@ -19,6 +20,7 @@ import xyz.denprog.studentcommunityassitance.databinding.FragmentRequestsListBin
  */
 class RequestsFragment : Fragment() {
     val viewModel: RequestsViewModel by activityViewModels()
+    val adminViewModel: AdminActivityViewModel by activityViewModels()
     private lateinit var binding: FragmentRequestsListBinding;
     private val adapter = MyRequestsRecyclerViewAdapter(ArrayList())
 
@@ -42,6 +44,11 @@ class RequestsFragment : Fragment() {
 
         viewModel.getAllRequests {
             adapter.refreshAdapter(it)
+        }
+
+        adapter.onRequestClicked = {
+            adminViewModel.requestSelected = it.requestId
+
         }
 
         return binding.root

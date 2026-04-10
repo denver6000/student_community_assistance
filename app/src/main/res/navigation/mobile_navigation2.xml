@@ -22,5 +22,13 @@
         android:id="@+id/requestsFragment2"
         android:name="xyz.denprog.studentcommunityassitance.admin.ui.requests_management.RequestsFragment"
         android:label="fragment_requests_list"
-        tools:layout="@layout/fragment_requests_list" />
+        tools:layout="@layout/fragment_requests_list" >
+        <action
+            android:id="@+id/action_requestsFragment2_to_requestDetailFragment2"
+            app:destination="@id/requestDetailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestDetailFragment2"
+        android:name="xyz.denprog.studentcommunityassitance.user.requests_management.RequestDetailFragment"
+        android:label="RequestDetailFragment" />
 </navigation>
