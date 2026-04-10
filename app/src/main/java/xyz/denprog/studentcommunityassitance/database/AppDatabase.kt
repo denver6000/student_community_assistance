@@ -5,13 +5,15 @@ import androidx.room.RoomDatabase
 import xyz.denprog.studentcommunityassitance.database.dao.AppDao
 import xyz.denprog.studentcommunityassitance.database.entity.Announcement
 import xyz.denprog.studentcommunityassitance.database.entity.Feedback
+import xyz.denprog.studentcommunityassitance.database.entity.LoggedInUser
 import xyz.denprog.studentcommunityassitance.database.entity.Request
 import xyz.denprog.studentcommunityassitance.database.entity.User
 
 @Database(
-    version = 1,
+    version = 3,
     entities = [
         User::class,
+        LoggedInUser::class,
         Request::class,
         Feedback::class,
         Announcement::class

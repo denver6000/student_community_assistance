@@ -4,19 +4,32 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import xyz.denprog.studentcommunityassitance.database.dao.AppDao
-import xyz.denprog.studentcommunityassitance.database.entity.Announcement
 import javax.inject.Inject
 
 @HiltViewModel class AnnouncementsManagementViewModel @Inject constructor(
-    appDao: AppDao
+    val appDao: AppDao
 ) : ViewModel(){
 
-    val announcements: MutableLiveData<List<Announcement>> = MutableLiveData()
+    val announcements: MutableLiveData<List<AnnouncementView>> = MutableLiveData(emptyList())
+
     init {
+        getAllAnnouncements()
+    }
+
+    fun getAllAnnouncements(onSuccess: (List<AnnouncementView>) -> Unit = {}) {
         viewModelScope.launch {
-            announcements.value = appDao.getAllAnnouncements()
+            val announcementViews = withContext(Dispatchers.IO) {
+                appDao.getAllAnnouncements()
+                    .map(AnnouncementView::from)
+                    .sortedByDescending { it.publishedAt }
+            }
+
+            announcements.value = announcementViews
+            onSuccess(announcementViews)
         }
     }
 

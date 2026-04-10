@@ -3,23 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
-
+    app:startDestination="@id/requestsFragment">
     <fragment
-        android:id="@+id/nav_home"
-        android:name="xyz.denprog.studentcommunityassitance.user.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/requestsFragment"
+        android:name="xyz.denprog.studentcommunityassitance.user.requests_management.UserViewRequestsFragment"
+        android:label="User Requests"
+        tools:layout="@layout/fragment_user_view_requests_list">
+        <action
+            android:id="@+id/action_requestsFragment_to_addRequestsFragment"
+            app:destination="@id/addRequestsFragment" />
+        <action
+            android:id="@+id/action_requestsFragment_to_requestDetailFragment"
+            app:destination="@id/requestDetailFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="xyz.denprog.studentcommunityassitance.user.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/addRequestsFragment"
+        android:name="xyz.denprog.studentcommunityassitance.user.requests_management.add_requests.AddRequestsFragment"
+        android:label="Add Request"
+        tools:layout="@layout/fragment_add_requests" />
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="xyz.denprog.studentcommunityassitance.user.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/requestDetailFragment"
+        android:name="xyz.denprog.studentcommunityassitance.user.requests_management.RequestDetailFragment"
+        android:label="Request Details"
+        tools:layout="@layout/fragment_request_detail" />
 </navigation>

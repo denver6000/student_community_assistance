@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginTop="12dp"
+    android:layout_marginTop="8dp"
     android:layout_marginBottom="4dp"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
     app:strokeColor="@android:color/darker_gray"
     app:strokeWidth="1dp">
 
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="18dp">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,41 +25,38 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/announcement_title"
+                android:id="@+id/request_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textColor="@android:color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Fix broken classroom projector" />
 
             <TextView
-                android:id="@+id/announcement_time"
+                android:id="@+id/request_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#E7F0FF"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="6dp"
+                android:paddingVertical="5dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                android:textColor="#1E5AA8" />
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                tools:text="Pending"
+                tools:backgroundTint="@android:color/holo_orange_light" />
+
         </LinearLayout>
 
         <TextView
-            android:id="@+id/announcement_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textColor="#5C6773" />
-
-        <TextView
-            android:id="@+id/content"
+            android:id="@+id/request_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:lineSpacingExtra="4dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:textColor="@android:color/black" />
+            android:layout_marginTop="6dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="@android:color/darker_gray"
+            tools:text="Apr 10, 2026" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

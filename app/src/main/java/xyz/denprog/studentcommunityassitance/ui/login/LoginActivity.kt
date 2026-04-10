@@ -1,9 +1,7 @@
 package xyz.denprog.studentcommunityassitance.ui.login
 
-import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -68,30 +66,11 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-                if (loginResult.success.isAdmin) {
-                    val adminPageIntent = Intent(
-                        this,
-                        AdminActivity::class.java
-                    )
-                    startActivity(
-                        adminPageIntent
-                    )
-                }else {
-                    val mainPageIntent = Intent(
-                        this,
-                        MainActivity::class.java
-                    )
-                    startActivity(
-                        mainPageIntent
-                    )
+                if (!loginResult.fromSavedSession) {
+                    updateUiWithUser(loginResult.success)
                 }
-                finish()
+                navigateToDestination(loginResult.success.isAdmin)
             }
-//            setResult(Activity.RESULT_OK)
-//
-//            //Complete and destroy login activity once successful
-//            finish()
         })
 
         username.afterTextChanged {
@@ -125,6 +104,8 @@ class LoginActivity : AppCompatActivity() {
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
         }
+
+        loginViewModel.checkForSavedLogin()
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
@@ -140,6 +121,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToDestination(isAdmin: Boolean) {
+        val intent = if (isAdmin) {
+            Intent(this, AdminActivity::class.java)
+        } else {
+            Intent(this, MainActivity::class.java)
+        }
+
+        startActivity(intent)
+        finish()
     }
 }
 

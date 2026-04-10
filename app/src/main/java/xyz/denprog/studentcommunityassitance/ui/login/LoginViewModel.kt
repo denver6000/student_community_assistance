@@ -7,11 +7,9 @@ import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import xyz.denprog.studentcommunityassitance.data.LoginRepository
-import xyz.denprog.studentcommunityassitance.data.Result
-
 import xyz.denprog.studentcommunityassitance.R
 import xyz.denprog.studentcommunityassitance.database.dao.AppDao
+import xyz.denprog.studentcommunityassitance.database.entity.LoggedInUser
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +27,15 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             val result = appDao.login(username, password)
             if (result != null) {
+                appDao.saveLoggedInUser(
+                    LoggedInUser(
+                        userId = result.userId,
+                        firstName = result.firstName,
+                        lastName = result.lastName,
+                        email = result.email,
+                        isAdmin = result.isAdmin
+                    )
+                )
                 _loginResult.value =
                     LoginResult(success = LoggedInUserView(
                         displayName = result.firstName,
@@ -36,6 +43,25 @@ class LoginViewModel @Inject constructor(
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }
+        }
+    }
+
+    fun checkForSavedLogin() {
+        viewModelScope.launch {
+            val loggedInUser = appDao.getLoggedInUser() ?: return@launch
+            _loginResult.value = LoginResult(
+                success = LoggedInUserView(
+                    displayName = loggedInUser.firstName,
+                    isAdmin = loggedInUser.isAdmin
+                ),
+                fromSavedSession = true
+            )
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            appDao.clearLoggedInUser()
         }
     }
 

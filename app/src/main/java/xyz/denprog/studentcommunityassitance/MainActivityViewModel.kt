@@ -59,4 +59,11 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
+    fun logout(onLoggedOut: () -> Unit) {
+        viewModelScope.launch {
+            appDao.clearLoggedInUser()
+            onLoggedOut()
+        }
+    }
+
 }

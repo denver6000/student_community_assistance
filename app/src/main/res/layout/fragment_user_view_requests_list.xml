@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".user.requests_management.UserViewRequestsFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_announcements"
+        android:id="@+id/add_requests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -20,8 +22,8 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
-        android:name="xyz.denprog.studentcommunityassitance.admin.ui.AnnouncementFragment"
+        android:id="@+id/requests_management_list"
+        android:name="xyz.denprog.studentcommunityassitance.user.requests_management.UserViewRequestsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -31,7 +33,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".admin.ui.announcement_management.AnnouncementFragment"
-        tools:listitem="@layout/fragment_announcement" />
-
+        tools:listitem="@layout/fragment_user_view_requests" />
 </androidx.constraintlayout.widget.ConstraintLayout>

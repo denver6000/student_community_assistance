@@ -12,6 +12,19 @@ class ProjectConstants {
             IN_PROGRESS,
             RESOLVED
         )
+
+        fun normalizeStatus(status: Int): Int {
+            return if (STATUS_LIST.contains(status)) status else PENDING
+        }
+
+        fun statusLabel(status: Int): String {
+            return when (normalizeStatus(status)) {
+                PENDING -> "Pending"
+                IN_PROGRESS -> "In Progress"
+                RESOLVED -> "Resolved"
+                else -> "Pending"
+            }
+        }
     }
 
 }

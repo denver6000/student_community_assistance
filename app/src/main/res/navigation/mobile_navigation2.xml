@@ -3,27 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation2"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/announcementFragment2">
 
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="xyz.denprog.studentcommunityassitance.admin.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="xyz.denprog.studentcommunityassitance.admin.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="xyz.denprog.studentcommunityassitance.admin.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/announcementFragment2"
         android:name="xyz.denprog.studentcommunityassitance.admin.ui.announcement_management.AnnouncementFragment"
-        android:label="AnnouncementFragment" />
+        android:label="AnnouncementFragment" >
+        <action
+            android:id="@+id/action_announcementFragment2_to_addAnnouncementsFragment"
+            app:destination="@id/addAnnouncementsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAnnouncementsFragment"
+        android:name="xyz.denprog.studentcommunityassitance.admin.ui.announcement_management.add.AddAnnouncementsFragment"
+        android:label="fragment_add_announcements"
+        tools:layout="@layout/fragment_add_announcements" />
+    <fragment
+        android:id="@+id/requestsFragment2"
+        android:name="xyz.denprog.studentcommunityassitance.admin.ui.requests_management.RequestsFragment"
+        android:label="fragment_requests_list"
+        tools:layout="@layout/fragment_requests_list" />
 </navigation>

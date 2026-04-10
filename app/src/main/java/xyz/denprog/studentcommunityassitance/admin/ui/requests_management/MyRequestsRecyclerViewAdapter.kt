@@ -34,6 +34,7 @@ class MyRequestsRecyclerViewAdapter(
     fun refreshAdapter(requests: List<Request>) {
         values.clear()
         values.addAll(requests)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
