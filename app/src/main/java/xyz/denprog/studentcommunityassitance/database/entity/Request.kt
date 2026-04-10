@@ -4,12 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Feedback (
+data class Request (
     @PrimaryKey
-    val feedbackId: Long,
-    val userId: Long,
     val requestId: Long,
-    val content: String,
-    val rating: Int,
-    val timestamp: Long
+    val title: String,
+    val category: String,
+    val description: String,
+    val timestamp: Long,
+    val adminNotes: String
 )

@@ -38,5 +38,8 @@ interface AppDao {
     )
     fun doesUserExist(email: String): User?
 
+    @Query("SELECT * FROM `Request`")
+    fun getAllRequests(): List<Request>
+
 
 }

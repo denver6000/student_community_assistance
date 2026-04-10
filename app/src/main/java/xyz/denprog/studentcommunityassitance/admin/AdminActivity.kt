@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import xyz.denprog.studentcommunityassitance.R
 import xyz.denprog.studentcommunityassitance.databinding.ActivityAdminBinding
 
 class AdminActivity : AppCompatActivity() {
