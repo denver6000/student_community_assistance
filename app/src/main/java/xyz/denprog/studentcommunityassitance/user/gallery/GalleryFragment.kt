@@ -1,4 +1,4 @@
-package xyz.denprog.studentcommunityassitance.ui.gallery
+package xyz.denprog.studentcommunityassitance.user.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
