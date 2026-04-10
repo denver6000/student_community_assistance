@@ -8,6 +8,7 @@ import android.widget.TextView
 import xyz.denprog.studentcommunityassitance.R
 
 import xyz.denprog.studentcommunityassitance.admin.ui.requests_management.placeholder.PlaceholderContent.PlaceholderItem
+import xyz.denprog.studentcommunityassitance.database.entity.Request
 import xyz.denprog.studentcommunityassitance.databinding.FragmentRequestsBinding
 
 /**
@@ -15,7 +16,7 @@ import xyz.denprog.studentcommunityassitance.databinding.FragmentRequestsBinding
  * TODO: Replace the implementation with code for your data type.
  */
 class MyRequestsRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
+    private val values: ArrayList<Request>
 ) : RecyclerView.Adapter<MyRequestsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +31,15 @@ class MyRequestsRecyclerViewAdapter(
 
     }
 
+    fun refreshAdapter(requests: List<Request>) {
+        values.clear()
+        values.addAll(requests)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.idView.text = item.requestId.toString()
+        holder.contentView.text = item.title
     }
 
     override fun getItemCount(): Int = values.size

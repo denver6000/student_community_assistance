@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import xyz.denprog.studentcommunityassitance.R
 import xyz.denprog.studentcommunityassitance.admin.ui.requests_management.placeholder.PlaceholderContent
+import xyz.denprog.studentcommunityassitance.database.entity.Request
 
 /**
  * A fragment representing a list of Items.
@@ -17,6 +19,7 @@ import xyz.denprog.studentcommunityassitance.admin.ui.requests_management.placeh
 class RequestsFragment : Fragment() {
 
     private var columnCount = 1
+    val viewModel: RequestsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +42,17 @@ class RequestsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyRequestsRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                adapter = MyRequestsRecyclerViewAdapter(ArrayList())
             }
         }
+
+        viewModel.requestsMutableLiveData.observe(requireActivity(), {
+            val adapter: MyRequestsRecyclerViewAdapter = ((view as RecyclerView).adapter) as MyRequestsRecyclerViewAdapter
+            adapter.refreshAdapter(
+                it
+            )
+        })
+
         return view
     }
 

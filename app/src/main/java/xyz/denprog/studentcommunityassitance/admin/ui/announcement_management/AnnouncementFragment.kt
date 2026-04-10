@@ -12,6 +12,8 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.HiltAndroidApp
 import xyz.denprog.studentcommunityassitance.R
 import xyz.denprog.studentcommunityassitance.admin.ui.announcement_management.placeholder.PlaceholderContent
+import xyz.denprog.studentcommunityassitance.databinding.FragmentAnnouncementBinding
+import xyz.denprog.studentcommunityassitance.databinding.FragmentAnnouncementListBinding
 
 /**
  * A fragment representing a list of Items.
@@ -32,34 +34,28 @@ class AnnouncementFragment : Fragment() {
         }
     }
 
+    lateinit var binding: FragmentAnnouncementListBinding;
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_announcement_list, container, false)
-
-        // Set the adapter
+        binding = FragmentAnnouncementListBinding.inflate(LayoutInflater.from(container?.context), container, false)
+        val layoutManager = binding.root.layoutManager
+        val adapter = MyAnnouncementRecyclerViewAdapter(emptyList())
         if (view is RecyclerView) {
             with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-
-                adapter = MyAnnouncementRecyclerViewAdapter(emptyList())
+                val adapter = MyAnnouncementRecyclerViewAdapter(emptyList())
+                binding.root.adapter = adapter
             }
         }
 
-        viewModel.announcements.observe(requireActivity(), { announcements ->
-            (view as RecyclerView).adapter?.let { adapter ->
-                if (adapter is MyAnnouncementRecyclerViewAdapter) {
-                    adapter.refresh(announcements)
-                }
-            }
-        })
+        viewModel.announcements.observe(requireActivity()) { announcements ->
+            adapter.refresh(announcements)
+        }
 
 
-        return view
+        return binding.root
     }
 
     companion object {
