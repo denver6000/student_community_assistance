@@ -22,4 +22,8 @@
         android:name="xyz.denprog.studentcommunityassitance.admin.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/announcementFragment2"
+        android:name="xyz.denprog.studentcommunityassitance.admin.ui.announcement_management.AnnouncementFragment"
+        android:label="AnnouncementFragment" />
 </navigation>

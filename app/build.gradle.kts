@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.fragment.ktx)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)

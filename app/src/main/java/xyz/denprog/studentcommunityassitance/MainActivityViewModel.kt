@@ -3,7 +3,9 @@ package xyz.denprog.studentcommunityassitance
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import xyz.denprog.studentcommunityassitance.database.dao.AppDao
 import xyz.denprog.studentcommunityassitance.database.entity.User
 import javax.inject.Inject
@@ -17,23 +19,25 @@ class MainActivityViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-             val user = appDao.insertUser(User(
-                 firstName = "Admin",
-                 lastName = "Admin",
-                 email = "admin",
-                 password = "admin",
-                 userId = 1,
-                 isAdmin = true
-             ))
+             withContext(Dispatchers.IO) {
+                 val user = appDao.insertUser(User(
+                     firstName = "Admin",
+                     lastName = "Admin",
+                     email = "admin",
+                     password = "admin",
+                     userId = 1,
+                     isAdmin = true
+                 ))
 
-            val user2 = appDao.insertUser(User(
-                firstName = "User",
-                lastName = "User",
-                email = "user",
-                password = "user",
-                userId = 2,
-                isAdmin = false
-            ))
+                 val user2 = appDao.insertUser(User(
+                     firstName = "User",
+                     lastName = "User",
+                     email = "user",
+                     password = "user",
+                     userId = 2,
+                     isAdmin = false
+                 ))
+             }
 
         }
 
@@ -44,9 +48,13 @@ class MainActivityViewModel @Inject constructor(
         onNotExist: () -> Unit
     ) {
         viewModelScope.launch {
-            val user = appDao.doesUserExist("admin")
-            if (user != null) {
-                onExist()
+            withContext(Dispatchers.IO) {
+                val user = appDao.doesUserExist("admin")
+                if (user != null) {
+                    onExist()
+                } else {
+                    onNotExist()
+                }
             }
         }
     }

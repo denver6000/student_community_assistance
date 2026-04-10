@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.denprog.studentcommunityassitance.MainActivity
+import xyz.denprog.studentcommunityassitance.MainActivityViewModel
 import xyz.denprog.studentcommunityassitance.databinding.ActivityLoginBinding
 
 import xyz.denprog.studentcommunityassitance.R
@@ -25,6 +26,7 @@ import xyz.denprog.studentcommunityassitance.admin.AdminActivity
 class LoginActivity : AppCompatActivity() {
 
     private val loginViewModel: LoginViewModel by viewModels()
+    private val mainActivity: MainActivityViewModel by viewModels()
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,12 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mainActivity.checkIfUsersExists(onExist = {
+
+        }, onNotExist = {
+            mainActivity.insertDefaultCreds()
+        })
 
         val username = binding.username
         val password = binding.password
@@ -148,4 +156,5 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
+
 }

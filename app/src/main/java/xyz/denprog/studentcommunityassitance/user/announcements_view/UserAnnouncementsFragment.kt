@@ -1,4 +1,4 @@
-package xyz.denprog.studentcommunityassitance.admin.ui.announcement_management
+package xyz.denprog.studentcommunityassitance.user.announcements_view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,20 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import dagger.hilt.android.HiltAndroidApp
 import xyz.denprog.studentcommunityassitance.R
-import xyz.denprog.studentcommunityassitance.admin.ui.announcement_management.placeholder.PlaceholderContent
-import xyz.denprog.studentcommunityassitance.databinding.FragmentAnnouncementBinding
-import xyz.denprog.studentcommunityassitance.databinding.FragmentAnnouncementListBinding
+import xyz.denprog.studentcommunityassitance.databinding.FragmentAnnouncementsUserListBinding
+import xyz.denprog.studentcommunityassitance.user.announcements_view.placeholder.PlaceholderContent
 
 /**
  * A fragment representing a list of Items.
  */
+class UserAnnouncementsFragment : Fragment() {
 
-class AnnouncementFragment : Fragment() {
+    val announcementUserViewModel: AnnouncementUserViewModel by activityViewModels()
 
-
-    val viewModel: AnnouncementsManagementViewModel by activityViewModels()
+    lateinit var binding: FragmentAnnouncementsUserListBinding;
 
     private var columnCount = 1
 
@@ -34,25 +32,26 @@ class AnnouncementFragment : Fragment() {
         }
     }
 
-    lateinit var binding: FragmentAnnouncementListBinding;
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAnnouncementListBinding.inflate(LayoutInflater.from(container?.context), container, false)
+        binding = FragmentAnnouncementsUserListBinding.inflate(
+            LayoutInflater.from(container?.context), container, false
+        )
+        val adapter = MyUserAnnouncementsRecyclerViewAdapter(emptyList())
 
-        val adapter = MyAnnouncementRecyclerViewAdapter(emptyList())
+        // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                val adapter = MyAnnouncementRecyclerViewAdapter(emptyList())
-                binding.list.adapter = adapter
+                binding.root.adapter = adapter
             }
         }
 
-        viewModel.announcements.observe(requireActivity()) { announcements ->
-            adapter.refresh(announcements)
+        announcementUserViewModel.getAnnouncements {
+            adapter.refreshAnnouncements(it)
         }
+
 
 
         return binding.root
@@ -66,7 +65,7 @@ class AnnouncementFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            AnnouncementFragment().apply {
+            UserAnnouncementsFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
