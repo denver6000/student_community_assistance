@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import xyz.denprog.studentcommunityassitance.database.entity.Announcement
+import xyz.denprog.studentcommunityassitance.database.entity.Feedback
 import xyz.denprog.studentcommunityassitance.database.entity.LoggedInUser
 import xyz.denprog.studentcommunityassitance.database.entity.Request
 import xyz.denprog.studentcommunityassitance.database.entity.User
@@ -27,6 +28,9 @@ interface AppDao {
 
     @Update
     fun updateRequest(request: Request)
+
+    @Query("UPDATE `Request` SET hasFeedBack = :hasFeedBack WHERE requestId = :requestId")
+    fun updateRequestFeedBackStatusById(requestId: Long, hasFeedBack: Boolean);
 
     @Query("SELECT * FROM `User` WHERE User.email = :username AND password = :password LIMIT 1")
     suspend fun login(username: String, password: String): User?
@@ -54,5 +58,7 @@ interface AppDao {
     @Query("SELECT * FROM `Request` WHERE requestId = :requestId LIMIT 1")
     suspend fun getRequestById(requestId: Long): Request?
 
+    @Insert
+    fun insertFeedBack(feedback: Feedback);
 
 }

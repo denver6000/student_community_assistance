@@ -50,7 +50,7 @@ class RequestsFragment : Fragment() {
         adapter.onRequestClicked = {
             adminViewModel.requestSelected = it.requestId
             val controller = NavHostFragment.findNavController(requireParentFragment())
-            controller.navigate(R.id.action_requestsFragment2_to_requestDetailFragment2)
+            controller.navigate(R.id.action_requestsFragment2_to_adminRequestInfoFragment)
         }
 
         return binding.root

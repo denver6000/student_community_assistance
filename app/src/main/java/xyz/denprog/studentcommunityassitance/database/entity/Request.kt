@@ -12,5 +12,6 @@ data class Request(
     val description: String,
     val timestamp: Long,
     val adminNotes: String = "",
-    val status: Int = 1
+    val status: Int = 1,
+    val hasFeedBack: Boolean = false,
 ) : java.io.Serializable

@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_requestsFragment_to_requestDetailFragment"
             app:destination="@id/requestDetailFragment" />
+        <action
+            android:id="@+id/action_requestsFragment_to_setFeedbackFragment"
+            app:destination="@id/setFeedbackFragment" />
     </fragment>
     <fragment
         android:id="@+id/addRequestsFragment"
@@ -26,4 +29,9 @@
         android:name="xyz.denprog.studentcommunityassitance.user.requests_management.RequestDetailFragment"
         android:label="Request Details"
         tools:layout="@layout/fragment_request_detail" />
+    <fragment
+        android:id="@+id/setFeedbackFragment"
+        android:name="xyz.denprog.studentcommunityassitance.user.feedback.add.SetFeedbackFragment"
+        android:label="fragment_set_feedback"
+        tools:layout="@layout/fragment_set_feedback" />
 </navigation>

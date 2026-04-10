@@ -18,6 +18,7 @@ class MyRequestsRecyclerViewAdapter(
 ) : RecyclerView.Adapter<MyRequestsRecyclerViewAdapter.ViewHolder>() {
 
     private val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+    var onSetFeedbackClick: ((Request) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -46,6 +47,15 @@ class MyRequestsRecyclerViewAdapter(
             ProjectConstants.RESOLVED -> Color.parseColor("#66BB6A")
             else -> Color.GRAY
         }
+        if (item.status == ProjectConstants.RESOLVED && !item.hasFeedBack) {
+            holder.setFeedbackButton.visibility = TextView.VISIBLE
+            holder.setFeedbackButton.setOnClickListener {
+                onSetFeedbackClick?.invoke(item)
+            }
+        } else {
+            holder.setFeedbackButton.visibility = TextView.GONE
+            holder.setFeedbackButton.setOnClickListener(null)
+        }
         holder.statusView.setBackgroundColor(statusColor)
         holder.itemView.setOnClickListener { onRequestClick(item) }
     }
@@ -57,5 +67,6 @@ class MyRequestsRecyclerViewAdapter(
         val titleView: TextView = binding.requestTitle
         val dateView: TextView = binding.requestDate
         val statusView: TextView = binding.requestStatus
+        val setFeedbackButton = binding.setFeedback
     }
 }

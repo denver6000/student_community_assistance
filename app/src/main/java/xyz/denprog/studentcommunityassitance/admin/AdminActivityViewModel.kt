@@ -27,4 +27,22 @@ class AdminActivityViewModel @Inject constructor(
             }
         }
     }
+
+    fun update(requestId: Long, newStatus: Int, onUpdateComplete: () -> Unit) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val request = appDao.getRequestById(requestId)
+                if (request != null) {
+                    val updatedRequest = request.copy(status = newStatus)
+                    appDao.updateRequest(updatedRequest)
+                    withContext(Dispatchers.Main) {
+                        onUpdateComplete()
+                    }
+                } else {
+                    // Handle the case where the request is not found
+                }
+            }
+        }
+
+    }
 }

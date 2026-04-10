@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.denprog.studentcommunityassitance.MainActivityViewModel
 import xyz.denprog.studentcommunityassitance.R
 import xyz.denprog.studentcommunityassitance.databinding.FragmentUserViewRequestsListBinding
 
@@ -19,6 +21,7 @@ class UserViewRequestsFragment : Fragment() {
 
     private var columnCount = 1
     private val viewModel: UserViewRequestsViewModel by viewModels()
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +65,12 @@ class UserViewRequestsFragment : Fragment() {
                 .navigate(R.id.action_requestsFragment_to_addRequestsFragment)
         }
 
+        adapter.onSetFeedbackClick = { request ->
+            mainActivityViewModel.selectedRequestId = request.requestId
+            NavHostFragment.findNavController(this).navigate(
+                R.id.action_requestsFragment_to_setFeedbackFragment
+            )
+        }
         loadRequests()
 
         return binding.root

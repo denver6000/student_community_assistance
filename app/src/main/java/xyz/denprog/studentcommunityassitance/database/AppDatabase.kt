@@ -10,7 +10,7 @@ import xyz.denprog.studentcommunityassitance.database.entity.Request
 import xyz.denprog.studentcommunityassitance.database.entity.User
 
 @Database(
-    version = 3,
+    version = 4,
     entities = [
         User::class,
         LoggedInUser::class,

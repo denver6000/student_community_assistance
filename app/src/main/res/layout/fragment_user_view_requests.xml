@@ -57,6 +57,12 @@
             android:textColor="@android:color/darker_gray"
             tools:text="Apr 10, 2026" />
 
+        <Button
+            android:id="@+id/set_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Feedback" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
