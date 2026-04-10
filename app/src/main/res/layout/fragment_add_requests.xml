@@ -1,46 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".user.requests_management.add_requests.AddRequestsFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_margin="16dp"
+        android:background="@drawable/input_box"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
-        <EditText
-            android:id="@+id/request_title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Request title"
-            android:inputType="textCapSentences" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <EditText
-            android:id="@+id/request_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:hint="Category"
-            android:inputType="textCapSentences" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a Request"
+                android:textColor="#3F51B5"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat_extrabold"
+                android:textSize="24sp"
+                android:layout_marginBottom="32dp"/>
 
-        <EditText
-            android:id="@+id/request_description"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="14dp"
-            android:gravity="top|start"
-            android:hint="Describe your request"
-            android:inputType="textMultiLine" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Request Title"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/request_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:fontFamily="@font/montserrat"
+                android:background="@drawable/input_box"
+                android:inputType="textCapSentences" />
 
-        <Button
-            android:id="@+id/submit_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Submit Request" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold" />
 
-</ScrollView>
+            <EditText
+                android:id="@+id/request_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:background="@drawable/input_box"
+                android:inputType="textCapSentences" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Request Description"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/request_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="5"
+                android:gravity="top|start"
+                android:padding="15dp"
+                android:background="@drawable/input_box"
+
+                android:hint=""
+                android:inputType="textMultiLine" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold"
+                android:background="@drawable/create_button"
+                android:text="Submit Request" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
