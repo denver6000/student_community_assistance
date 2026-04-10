@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import xyz.denprog.studentcommunityassitance.admin.ui.announcement_management.placeholder.PlaceholderContent
+import xyz.denprog.studentcommunityassitance.database.entity.Announcement
 
 import xyz.denprog.studentcommunityassitance.databinding.FragmentAnnouncementBinding
 
@@ -13,7 +14,7 @@ import xyz.denprog.studentcommunityassitance.databinding.FragmentAnnouncementBin
  * TODO: Replace the implementation with code for your data type.
  */
 class MyAnnouncementRecyclerViewAdapter(
-    private val values: List<PlaceholderContent.PlaceholderItem>
+    private val values: List<Announcement>
 ) : RecyclerView.Adapter<MyAnnouncementRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,9 +29,15 @@ class MyAnnouncementRecyclerViewAdapter(
 
     }
 
+    fun refresh(newValues: List<Announcement>) {
+        (values as MutableList).clear()
+        (values as MutableList).addAll(newValues)
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
+        holder.idView.text = item.announcementId.toString()
         holder.contentView.text = item.content
     }
 

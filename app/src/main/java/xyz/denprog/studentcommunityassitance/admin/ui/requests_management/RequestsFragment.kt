@@ -1,4 +1,4 @@
-package xyz.denprog.studentcommunityassitance.admin.ui.announcement_management
+package xyz.denprog.studentcommunityassitance.admin.ui.requests_management
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,19 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import dagger.hilt.android.HiltAndroidApp
 import xyz.denprog.studentcommunityassitance.R
-import xyz.denprog.studentcommunityassitance.admin.ui.announcement_management.placeholder.PlaceholderContent
+import xyz.denprog.studentcommunityassitance.admin.ui.requests_management.placeholder.PlaceholderContent
 
 /**
  * A fragment representing a list of Items.
  */
-
-class AnnouncementFragment : Fragment() {
-
-
-    val viewModel: AnnouncementsManagementViewModel by activityViewModels()
+class RequestsFragment : Fragment() {
 
     private var columnCount = 1
 
@@ -36,7 +30,7 @@ class AnnouncementFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_announcement_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_requests_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -45,20 +39,9 @@ class AnnouncementFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-
-                adapter = MyAnnouncementRecyclerViewAdapter(emptyList())
+                adapter = MyRequestsRecyclerViewAdapter(PlaceholderContent.ITEMS)
             }
         }
-
-        viewModel.announcements.observe(requireActivity(), { announcements ->
-            (view as RecyclerView).adapter?.let { adapter ->
-                if (adapter is MyAnnouncementRecyclerViewAdapter) {
-                    adapter.refresh(announcements)
-                }
-            }
-        })
-
-
         return view
     }
 
@@ -70,7 +53,7 @@ class AnnouncementFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            AnnouncementFragment().apply {
+            RequestsFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }

@@ -18,6 +18,8 @@ interface AppDao {
     @Delete
     fun deleteAnnouncement(announcement: Announcement)
 
+    @Query("SELECT * FROM Announcement")
+    fun getAllAnnouncements(): List<Announcement>
     @Insert
     fun insertRequest(request: Request): Long
 
@@ -35,4 +37,6 @@ interface AppDao {
         "SELECT * FROM `User` WHERE User.email = :email LIMIT 1"
     )
     fun doesUserExist(email: String): User?
+
+
 }
